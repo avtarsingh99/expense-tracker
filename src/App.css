@@ -4,9 +4,161 @@
   max-width: 900px;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   box-sizing: border-box;
+  border: 2px solid lightgrey;
+  border-radius: 24px;
 }
 
-h1 {
-  text-align: center;
+
+header{
+background: linear-gradient(135deg, purple, #141d38);
+padding: 20px;
+border-radius: 24px;
+text-align: center;
+}
+
+header h1 {
+  color: #fcdb32;
   font-size: 2.5rem;
+}
+
+header p {
+  font-size: 1.1rem;
+  color: whitesmoke;
+  font-style: italic;
+  letter-spacing: 3px;
+  opacity: 0.8;
+}
+
+.line {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(135deg, purple, #141d38);
+  margin-top: 24px;
+  border-radius: 12px;
+}
+
+/* Expense form */
+.top-group {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 16px;
+}
+
+.top-group label {
+  display: block;
+  font-weight: bold;
+  color: #acacac;
+}
+
+.top-group input, select {
+  padding: 12px;
+  border-radius: 14px;
+  border: 2px solid lightgrey;
+  font-size: 1rem;
+  margin-top: 5px;
+}
+
+.bottom-group{
+  margin-top: 24px;
+}
+
+.add-btn {
+  width: 100%;
+  padding: 14px;
+  border-radius: 14px;
+  background: #141d38;
+  border: none;
+  color: #fcdb32;
+  font-weight: bold;
+  font-size: 1.1rem;
+  transition: background 0.3s ease;
+}
+
+.add-btn:hover {
+  background: linear-gradient(135deg, purple, #141d38);
+}
+
+/* Expense card */
+
+.expenses-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%/3), 1fr));
+  gap: 16px;
+}
+
+.expenses-grid{
+  margin-top: 24px;
+}
+
+.expense-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid #3447aa;
+  background: white;
+  padding: 12px;
+  border-radius: 12px;
+}
+
+.expense-left-part{
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.desc{
+  font-weight: bold;
+  color: #141d38;
+  font-size: 1.1rem;
+}
+
+.category {
+  background-color: #3447aa;
+  color: #ffeef4;
+  padding: 4px 12px;
+  width: fit-content;
+  border-radius: 14px;
+  font-size: small;
+}
+
+.date {
+  opacity: 0.5;
+  color: #141d38;
+  font-style: italic;
+}
+
+.amount {
+  font-weight: bold;
+  font-size: 1.5rem;
+  color: #3447aa;
+}
+
+@media (max-width: 768px) {
+
+  header h1 {
+    font-size: 1.5rem;
+  }
+
+  header p {
+    font-size: 0.8rem;
+  }
+
+  .top-group {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 16px;
+  }
+
+  .top-group label {
+    font-size: 0.8rem;
+  }
+
+  .top-group input, select {
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid lightgrey;
+    font-size: 0.8rem;
+    width: 100%;
+  }
 }
