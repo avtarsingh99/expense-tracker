@@ -2,18 +2,28 @@
   margin: 0 auto;
   padding: 24px;
   max-width: 900px;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-family:
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Oxygen,
+    Ubuntu,
+    Cantarell,
+    "Open Sans",
+    "Helvetica Neue",
+    sans-serif;
   box-sizing: border-box;
   border: 2px solid lightgrey;
   border-radius: 24px;
 }
 
-
-header{
-background: linear-gradient(135deg, purple, #141d38);
-padding: 20px;
-border-radius: 24px;
-text-align: center;
+header {
+  background: linear-gradient(135deg, purple, #141d38);
+  padding: 20px;
+  border-radius: 24px;
+  text-align: center;
 }
 
 header h1 {
@@ -35,6 +45,7 @@ header p {
   background: linear-gradient(135deg, purple, #141d38);
   margin-top: 24px;
   border-radius: 12px;
+  opacity: 0.2;
 }
 
 /* Expense form */
@@ -50,15 +61,18 @@ header p {
   color: #acacac;
 }
 
-.top-group input, select {
+.top-group input,
+select {
   padding: 12px;
   border-radius: 14px;
   border: 2px solid lightgrey;
   font-size: 1rem;
   margin-top: 5px;
+  box-sizing: border-box;
+  width: 220px;
 }
 
-.bottom-group{
+.bottom-group {
   margin-top: 24px;
 }
 
@@ -71,14 +85,28 @@ header p {
   color: #fcdb32;
   font-weight: bold;
   font-size: 1.1rem;
+  cursor: pointer;
   transition: background 0.3s ease;
 }
 
-.add-btn:hover {
+.add-btn:disabled {
+  cursor: not-allowed;
+  background: gray;
+}
+
+.add-btn:not(:disabled):hover {
   background: linear-gradient(135deg, purple, #141d38);
 }
 
 /* Expense card */
+
+.empty-state {
+  display: flex;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 1.3rem;
+  color: #acacac;
+}
 
 .expenses-grid {
   display: grid;
@@ -86,27 +114,26 @@ header p {
   gap: 16px;
 }
 
-.expenses-grid{
+.expenses-grid {
   margin-top: 24px;
 }
 
 .expense-card {
   display: flex;
   justify-content: space-between;
-  align-items: center;
   border: 1px solid #3447aa;
   background: white;
   padding: 12px;
   border-radius: 12px;
 }
 
-.expense-left-part{
+.expense-left-part {
   display: flex;
   flex-direction: column;
   gap: 12px;
 }
 
-.desc{
+.desc {
   font-weight: bold;
   color: #141d38;
   font-size: 1.1rem;
@@ -127,20 +154,84 @@ header p {
   font-style: italic;
 }
 
+.expense-right-part {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .amount {
   font-weight: bold;
-  font-size: 1.5rem;
+  font-size: 1.8rem;
   color: #3447aa;
 }
 
-@media (max-width: 768px) {
+.delete-btn {
+  padding: 6px 16px;
+  border-radius: 8px;
+  background: rgb(255, 218, 218);
+  color: crimson;
+  border: none;
+  font-size: 0.8rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
 
+.delete-btn:hover{
+  background: crimson;
+  color: white;
+}
+
+/* Total expenses */
+.summary {
+  background: linear-gradient(135deg, purple, #141d38);
+  text-align: center;
+  padding: 24px;
+  border-radius: 24px;
+  margin-top: 24px;
+}
+
+.summary p {
+  font-size: 1.1rem;
+  letter-spacing: 2px;
+  color: #ffeef4;
+}
+
+.total-amount {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #fcdb32;
+}
+
+.footer {
+  margin-top: 24px;
+  display: flex;
+  justify-content: center;
+}
+
+.clear-storage, .clear-btn {
+  padding: 8px 18px;
+  border-radius: 8px;
+  border: none;
+  background: lightgrey;
+  font-size: small;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.clear-storage:hover, .clear-btn:hover{
+  background: #acacac;
+}
+
+@media (max-width: 768px) {
   header h1 {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
   }
 
   header p {
-    font-size: 0.8rem;
+    font-size: 0.6rem;
   }
 
   .top-group {
@@ -154,11 +245,32 @@ header p {
     font-size: 0.8rem;
   }
 
-  .top-group input, select {
+  .top-group input,
+  select {
     padding: 10px;
     border-radius: 8px;
     border: 1px solid lightgrey;
     font-size: 0.8rem;
     width: 100%;
+  }
+
+  .add-btn{
+    font-size: 0.8rem;
+  }
+
+  .summary{
+    padding: 16px;
+  } 
+
+  .summary p{
+    font-size: 0.8rem;
+  }
+
+  .total-amount{
+    font-size: 1.8rem;
+  }
+
+  .clear-storage{
+    font-size: x-small;
   }
 }
