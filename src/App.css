@@ -1,7 +1,6 @@
 .app {
-  margin: 0 auto;
-  padding: 24px;
-  max-width: 900px;
+  margin: 0;
+  max-width: 100vw;
   font-family:
     system-ui,
     -apple-system,
@@ -15,13 +14,12 @@
     "Helvetica Neue",
     sans-serif;
   box-sizing: border-box;
-  border: 2px solid lightgrey;
   border-radius: 24px;
 }
 
 header {
   background: linear-gradient(135deg, purple, #141d38);
-  padding: 20px;
+  padding: 16px;
   border-radius: 24px;
   text-align: center;
 }
@@ -48,32 +46,66 @@ header p {
   opacity: 0.2;
 }
 
+.main {
+  display: flex;
+  gap: 32px;
+  align-items: flex-start;
+}
+
+.sidebar {
+  max-width: 360px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid lightgrey;
+}
+
+.content {
+  margin-top: 20px;
+}
+
+.search-group {
+  display: flex;
+  justify-content: space-between;
+}
+
+.filters-group {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+}
+
 /* Expense form */
 .top-group {
   display: flex;
-  justify-content: space-between;
-  margin-top: 16px;
+  flex-direction: column;
+  gap: 20px;
 }
 
-.top-group label {
+.input-group label {
   display: block;
   font-weight: bold;
   color: #acacac;
 }
 
-.top-group input,
-select {
+.input-group {
+  width: 100%;
+}
+ 
+.input-group input,
+.input-group select {
   padding: 12px;
   border-radius: 14px;
   border: 2px solid lightgrey;
   font-size: 1rem;
   margin-top: 5px;
   box-sizing: border-box;
-  width: 220px;
+  width: 100%;
 }
 
 .bottom-group {
   margin-top: 24px;
+  margin-left: 16px;
 }
 
 .add-btn {
@@ -103,6 +135,7 @@ select {
 .empty-state {
   display: flex;
   justify-content: center;
+  align-items: center;
   font-weight: bold;
   font-size: 1.3rem;
   color: #acacac;
@@ -110,21 +143,49 @@ select {
 
 .expenses-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%/3), 1fr));
+  grid-template-columns: repeat(4, 1fr);
   gap: 16px;
-}
-
-.expenses-grid {
   margin-top: 24px;
 }
 
 .expense-card {
   display: flex;
   justify-content: space-between;
-  border: 1px solid #3447aa;
   background: white;
   padding: 12px;
   border-radius: 12px;
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.2s ease;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.expense-card.food {
+  border-left: 4px solid #f59e0b;
+}
+
+.expense-card.travel {
+  border-left: 4px solid #3b82f6;
+}
+
+.expense-card.shopping {
+  border-left: 4px solid #ec4899;
+}
+
+.expense-card.bill {
+  border-left: 4px solid #000000;
+}
+
+.expense-card.entertainment {
+  border-left: 4px solid #10b981;
+}
+
+.expense-card.other {
+  border-left: 4px solid #6b7280;
+}
+
+.expense-card:hover {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .expense-left-part {
@@ -140,12 +201,30 @@ select {
 }
 
 .category {
-  background-color: #3447aa;
   color: #ffeef4;
   padding: 4px 12px;
   width: fit-content;
   border-radius: 14px;
   font-size: small;
+}
+
+.category.food {
+  background-color: #f59e0b;
+}
+.category.travel {
+  background-color: #3b82f6;
+}
+.category.shopping {
+  background-color: #ec4899;
+}
+.category.entertainment {
+  background-color: #10b981;
+}
+.category.bill {
+  background-color: #000000;
+}
+.category.other {
+  background-color: #6b7280;
 }
 
 .date {
@@ -158,13 +237,53 @@ select {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-end;
 }
 
 .amount {
   font-weight: bold;
   font-size: 1.8rem;
   color: #3447aa;
+}
+
+.btn-group {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.edit-btn {
+  padding: 6px 16px;
+  border-radius: 8px;
+  background: rgb(223, 223, 223);
+  color: #3a3a3a;
+  border: none;
+  font-size: 0.8rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.edit-btn:hover {
+  background: #3a3a3a;
+  color: rgb(223, 223, 223);
+}
+
+.save-btn {
+  padding: 6px 16px;
+  border-radius: 8px;
+  background-color: rgb(192, 248, 192);
+  color: green;
+  border: none;
+  font-size: 0.8rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.save-btn:hover {
+  background: green;
+  color: white;
 }
 
 .delete-btn {
@@ -176,12 +295,22 @@ select {
   font-size: 0.8rem;
   font-weight: bold;
   cursor: pointer;
-  transition: all 0.3s ease-in-out;
+  transition: all 0.2s ease-in-out;
 }
 
-.delete-btn:hover{
+.delete-btn:hover {
   background: crimson;
   color: white;
+}
+
+/* Edit card inputs */
+.edit-input,
+.edit-select {
+  padding: 6px;
+  border-radius: 10px;
+  border: 1px solid lightgrey;
+  font-size: 0.9rem;
+  max-width: 100px;
 }
 
 /* Total expenses */
@@ -211,7 +340,8 @@ select {
   justify-content: center;
 }
 
-.clear-storage, .clear-btn {
+.clear-storage,
+.clear-btn {
   padding: 8px 18px;
   border-radius: 8px;
   border: none;
@@ -221,17 +351,77 @@ select {
   cursor: pointer;
 }
 
-.clear-storage:hover, .clear-btn:hover{
+.clear-storage:hover,
+.clear-btn:hover {
   background: #acacac;
 }
 
 @media (max-width: 768px) {
+
+  .app {
+    padding: 16px;
+  }
+  .main {
+    display: flex;
+    flex-direction: column;
+    pad: 12px;
+  }
+
+  .sidebar {
+    width: 100%;
+    padding: 0;
+    border-right: none;
+    max-width: 100%;
+  }
+
+  .content {
+    margin-top: 0;
+    width: 100%;
+  }
+
   header h1 {
     font-size: 1.2rem;
   }
 
   header p {
     font-size: 0.6rem;
+  }
+
+  .search-group {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .filters-group {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .expenses-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .desc {
+    font-size: 12px;
+  }
+
+  .category {
+    font-size: 12px;
+  }
+
+  .date {
+    font-size: 12px;
+  }
+
+  .amount {
+    font-size: 1.3rem;
+  }
+
+  .delete-btn {
+    font-size: 12px;
   }
 
   .top-group {
@@ -241,12 +431,13 @@ select {
     margin-top: 16px;
   }
 
-  .top-group label {
+  .input-group label {
     font-size: 0.8rem;
   }
 
-  .top-group input,
-  select {
+
+  .input-group input,
+  .input-group select {
     padding: 10px;
     border-radius: 8px;
     border: 1px solid lightgrey;
@@ -254,23 +445,23 @@ select {
     width: 100%;
   }
 
-  .add-btn{
+  .add-btn {
     font-size: 0.8rem;
   }
 
-  .summary{
+  .summary {
     padding: 16px;
-  } 
+  }
 
-  .summary p{
+  .summary p {
     font-size: 0.8rem;
   }
 
-  .total-amount{
+  .total-amount {
     font-size: 1.8rem;
   }
 
-  .clear-storage{
+  .clear-storage {
     font-size: x-small;
   }
 }

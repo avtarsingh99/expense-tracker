@@ -16,15 +16,22 @@ const useExpenses = () => {
     }
 
     const removeExpense = (id) => {
-        setExpenses(prevExpenses => prevExpenses.filter(expense => expense.id !== id))
+
+        const confirmDelete = window.confirm("Are you sure you want to delete this expense ?");
+
+        if (confirmDelete) {
+            setExpenses(prevExpenses => prevExpenses.filter(expense => expense.id !== id))
+        }
+
     }
 
-    const getTotalAmount = useMemo(()=> {
-        return expenses.reduce((sum, expense)=> sum + expense.amount, 0);
+    const getTotalAmount = useMemo(() => {
+        return expenses.reduce((sum, expense) => sum + expense.amount, 0);
     }, [expenses])
 
-    return { 
+    return {
         expenses,
+        setExpenses,
         addExpense,
         removeExpense,
         getTotalAmount,
