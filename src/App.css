@@ -1,6 +1,8 @@
 .app {
   margin: 0;
+  padding: 0;
   max-width: 100vw;
+  max-height: 100vh;
   font-family:
     system-ui,
     -apple-system,
@@ -19,14 +21,15 @@
 
 header {
   background: linear-gradient(135deg, purple, #141d38);
-  padding: 16px;
   border-radius: 24px;
   text-align: center;
+  padding: 20px;
 }
 
 header h1 {
   color: #fcdb32;
   font-size: 2.5rem;
+  margin: 0;
 }
 
 header p {
@@ -35,6 +38,7 @@ header p {
   font-style: italic;
   letter-spacing: 3px;
   opacity: 0.8;
+  margin: 0;
 }
 
 .line {
@@ -197,7 +201,7 @@ header p {
 .desc {
   font-weight: bold;
   color: #141d38;
-  font-size: 1.1rem;
+  font-size: 14px;
 }
 
 .category {
@@ -242,7 +246,7 @@ header p {
 
 .amount {
   font-weight: bold;
-  font-size: 1.8rem;
+  font-size: 20px;
   color: #3447aa;
 }
 

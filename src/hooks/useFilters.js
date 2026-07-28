@@ -12,6 +12,17 @@ const useFilters = (data) => {
     })
 
     const updateFilter = (key, value) => {
+
+        if (key === 'dateFrom' && filters.dateTo && value > filters.dateTo) {
+            alert("From date can't be later than To date!!!");
+            return;
+        }
+
+        if (key === 'dateTo' && filters.dateFrom && value < filters.dateFrom) {
+            alert("To date can't be earlier than From date!!!");
+            return;
+        }
+
         setFilters(prev => ({
             ...prev,
             [key]: value
@@ -33,31 +44,29 @@ const useFilters = (data) => {
 
         return data.filter(item => {
 
-            console.log('item.date:', item.date, '| dateFrom:', filters.dateFrom, '| comparison:', item.date < filters.dateFrom);
-
             //filtering categories
-            if(filters.category !== 'all' && item.category !== filters.category){
+            if (filters.category !== 'all' && item.category !== filters.category) {
                 return false;
             }
 
             // filter date range
-            if(filters.dateFrom && item.date < filters.dateFrom){
+            if (filters.dateFrom && item.date < filters.dateFrom) {
                 return false;
             }
-            if(filters.dateTo && item.date > filters.dateTo){
+            if (filters.dateTo && item.date > filters.dateTo) {
                 return false;
             }
 
             // filter amount
-            if(filters.minAmount && item.amount < parseInt(filters.minAmount)){
+            if (filters.minAmount && item.amount < parseInt(filters.minAmount)) {
                 return false;
             }
-            if(filters.maxAmount && item.amount > parseInt(filters.maxAmount)){
+            if (filters.maxAmount && item.amount > parseInt(filters.maxAmount)) {
                 return false;
             }
 
             // filter search term
-            if(filters.searchTerm && !item.description.toLowerCase().includes(filters.searchTerm.toLowerCase())){
+            if (filters.searchTerm && !item.description.toLowerCase().includes(filters.searchTerm.toLowerCase())) {
                 return false;
             }
 
@@ -67,11 +76,11 @@ const useFilters = (data) => {
 
     const getFilterSummary = () => {
         const activeFiltersArray = Object.entries(filters).filter(([key, value]) => {
-            if(key === 'category') return value !== 'all';
+            if (key === 'category') return value !== 'all';
             return value !== '';
         })
 
-        return{
+        return {
             activeFiltersCount: activeFiltersArray.length,
             totalResult: filteredExpenses.length,
             hasActiveFilters: activeFiltersArray.length > 0
@@ -79,7 +88,7 @@ const useFilters = (data) => {
     }
 
 
-    return {filters, updateFilter, clearFilters, filteredExpenses, getFilterSummary}
+    return { filters, updateFilter, clearFilters, filteredExpenses, getFilterSummary }
 }
 
 export default useFilters

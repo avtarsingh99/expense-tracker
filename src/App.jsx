@@ -37,8 +37,13 @@ function App() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (!description.trim() || !amount) {
-      alert("Description & Amount are compulsory!!!")
+    if (description.length > 25) {
+      alert("Expense title can't be more than 25 characters !!!");
+      setDescription('')
+      return
+    } else if (amount > 9999) {
+      alert("Expense amount can't be more than ₹9999")
+      setAmount('')
       return
     }
 
@@ -64,6 +69,22 @@ function App() {
   }
 
   const saveEditData = () => {
+
+    if (!editingCardData.description.trim()) {
+      alert("Title can't be empty!!!");
+      return;
+    }
+
+    if (editingCardData.description.length > 25) {
+      alert("Title can't be more than 25 characters !!!");
+      setEditingCardData(prev => ({ ...prev, description: editingCardData.description.slice(0, 25) }));
+      return;
+    }
+
+    if (editingCardData.amount === '' || Number(editingCardData.amount) <= 0) {
+      alert("Amount must be more than zero !!!");
+      return;
+    }
 
     setExpenses(prevExpenses =>
       prevExpenses.map(expense =>
@@ -104,14 +125,15 @@ function App() {
             <form className='add-form' onSubmit={handleSubmit}>
               <div className='top-group'>
                 <div className='input-group'>
-                  <label htmlFor='desc'>Description: </label>
+                  <label htmlFor='desc'>Title: </label>
                   <input
                     type='text'
                     id='desc'
                     value={description}
-                    placeholder='Expense description...'
+                    placeholder='Expense title'
                     onChange={(e) => setDescription(e.target.value)}
                   />
+                  <small style={description.length > 25 ? { color: 'crimson' } : {}}>{description.length}/25</small>
                 </div>
                 <div className='input-group'>
                   <label htmlFor='amount'>Amount: </label>
@@ -156,10 +178,10 @@ function App() {
             <div className='filters-section'>
               <div className='search-group'>
                 <div className='input-group'>
-                  <label>Search with Desc: </label>
+                  <label>Search with Title: </label>
                   <input
                     type='text'
-                    placeholder='Search desc here...'
+                    placeholder='Search title here'
                     value={filters.searchTerm}
                     onChange={(e) => updateFilter("searchTerm", e.target.value)}
                   />
@@ -238,10 +260,11 @@ function App() {
                         <input
                           className='edit-input'
                           type='text'
-                          placeholder='Expense desc here'
+                          placeholder='Expense title here'
                           value={editingCardData.description}
                           onChange={(e) => setEditingCardData(prev => ({ ...prev, description: e.target.value }))}
                         />
+                        <small style={editingCardData.description.length > 25 ? { color: 'crimson' } : {}}>{editingCardData.description.length}/25</small>
                         <select className='edit-select' value={editingCardData.category} onChange={(e) => setEditingCardData(prev => ({ ...prev, category: e.target.value }))}>
                           {categories.slice(1).map(category => (
                             <option key={category} value={category}>{category.charAt(0).toUpperCase() + category.slice(1)}</option>
