@@ -116,8 +116,6 @@ function App() {
         <p>Track all your expenses right here!</p>
       </header>
 
-      <div className='line'></div>
-
       <main>
         <div className='main'>
 
@@ -176,74 +174,81 @@ function App() {
 
           <div className='content'>
             <div className='filters-section'>
-              <div className='search-group'>
-                <div className='input-group'>
-                  <label>Search with Title: </label>
-                  <input
-                    type='text'
-                    placeholder='Search title here'
-                    value={filters.searchTerm}
-                    onChange={(e) => updateFilter("searchTerm", e.target.value)}
-                  />
-                </div>
-                {filterSummary.hasActiveFilters && (
-                  <div className='bottom-group'>
-                    <button onClick={clearFilters} className='clear-btn'>Clear Filters ({filterSummary.activeFiltersCount})</button>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '24px' }}>
+                <div>
+                  <div className='search-group'>
+                    <div className='input-group'>
+                      <label>Search with Title: </label>
+                      <input
+                        type='text'
+                        placeholder='Search title here'
+                        value={filters.searchTerm}
+                        onChange={(e) => updateFilter("searchTerm", e.target.value)}
+                      />
+                    </div>
+                    {filterSummary.hasActiveFilters && (
+                      <div className='bottom-group'>
+                        <button onClick={clearFilters} className='clear-btn'>Clear Filters ({filterSummary.activeFiltersCount})</button>
+                      </div>
+                    )}
                   </div>
-                )}
+                  <div className='filters-group'>
+                    <div className='input-group'>
+                      <label>Categories: </label>
+                      <select
+                        value={filters.category}
+                        onChange={(e) => updateFilter("category", e.target.value)}
+                      >
+                        {categories.map(category => (
+                          <option key={category} value={category}>{category.charAt(0).toUpperCase() + category.slice(1)}</option>
+                        ))}
+                      </select>
+                    </div>
+                    <div className='input-group'>
+                      <label>Min Amount:</label>
+                      <input
+                        type='number'
+                        value={filters.minAmount}
+                        placeholder='₹ 0'
+                        onChange={(e) => updateFilter("minAmount", e.target.value)}
+                      />
+                    </div>
+                    <div className='input-group'>
+                      <label>Max Amount:</label>
+                      <input
+                        type='number'
+                        value={filters.maxAmount}
+                        placeholder='₹ 0'
+                        onChange={(e) => updateFilter("maxAmount", e.target.value)}
+                      />
+                    </div>
+                    <div className='input-group'>
+                      <label>From Date:</label>
+                      <input
+                        type='date'
+                        value={filters.dateFrom}
+                        onChange={(e) => updateFilter("dateFrom", e.target.value)}
+                      />
+                    </div>
+                    <div className='input-group'>
+                      <label>To Date:</label>
+                      <input
+                        type='date'
+                        value={filters.dateTo}
+                        onChange={(e) => updateFilter("dateTo", e.target.value)}
+                      />
+                    </div>
+                  </div>
+                  {filterSummary.hasActiveFilters && (
+                    <p>Showing {filteredExpenses.length} {filteredExpenses.length > 1 ? 'expenses' : 'expense'} out of {expenses.length} expenses </p>
+                  )}
+                </div>
+                <div className='summary'>
+                  <p>Expenses Grand Total</p>
+                  <div className='total-amount'>₹ {getTotalAmount}</div>
+                </div>
               </div>
-              <div className='filters-group'>
-                <div className='input-group'>
-                  <label>Filter By Categories: </label>
-                  <select
-                    value={filters.category}
-                    onChange={(e) => updateFilter("category", e.target.value)}
-                  >
-                    {categories.map(category => (
-                      <option key={category} value={category}>{category.charAt(0).toUpperCase() + category.slice(1)}</option>
-                    ))}
-                  </select>
-                </div>
-                <div className='input-group'>
-                  <label>Min Amount:</label>
-                  <input
-                    type='number'
-                    value={filters.minAmount}
-                    placeholder='₹ 0'
-                    onChange={(e) => updateFilter("minAmount", e.target.value)}
-                  />
-                </div>
-                <div className='input-group'>
-                  <label>Max Amount:</label>
-                  <input
-                    type='number'
-                    value={filters.maxAmount}
-                    placeholder='₹ 0'
-                    onChange={(e) => updateFilter("maxAmount", e.target.value)}
-                  />
-                </div>
-                <div className='input-group'>
-                  <label>From Date:</label>
-                  <input
-                    type='date'
-                    value={filters.dateFrom}
-                    onChange={(e) => updateFilter("dateFrom", e.target.value)}
-                  />
-                </div>
-                <div className='input-group'>
-                  <label>To Date:</label>
-                  <input
-                    type='date'
-                    value={filters.dateTo}
-                    onChange={(e) => updateFilter("dateTo", e.target.value)}
-                  />
-                </div>
-              </div>
-              {filterSummary.hasActiveFilters && (
-                <p>Showing {filteredExpenses.length} {filteredExpenses.length > 1 ? 'expenses' : 'expense'} out of {expenses.length} expenses </p>
-              )}
             </div>
-            <div className='line'></div>
 
             <div className='expenses-grid'>
               {filteredExpenses.length === 0 ? (
@@ -304,13 +309,6 @@ function App() {
                   )
                 ))
               )}
-            </div>
-
-            <div className='line'></div>
-
-            <div className='summary'>
-              <p>Expenses Grand Total</p>
-              <div className='total-amount'>₹ {getTotalAmount}</div>
             </div>
           </div>
 
