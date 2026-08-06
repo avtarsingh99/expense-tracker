@@ -1,4 +1,4 @@
-*{
+* {
   margin: 0;
   padding: 0;
 }
@@ -79,8 +79,20 @@ header p {
 
 .filters-group {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   gap: 20px;
+}
+
+.filters-group,
+.input-group {
+  width: auto;
+}
+
+.filters-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 36px;
 }
 
 /* Expense form */
@@ -100,13 +112,13 @@ header p {
 .input-group {
   width: 100%;
 }
- 
+
 .input-group input,
 .input-group select {
   padding: 12px;
   border-radius: 14px;
   border: 2px solid lightgrey;
-  font-size: 1rem;
+  font-size: 14px;
   margin-top: 5px;
   box-sizing: border-box;
   width: 100%;
@@ -114,7 +126,6 @@ header p {
 
 .bottom-group {
   margin-top: 24px;
-  margin-left: 16px;
 }
 
 .add-btn {
@@ -259,6 +270,7 @@ header p {
   display: flex;
   justify-content: space-between;
   gap: 12px;
+  margin-top: 16px;
 }
 
 .edit-btn {
@@ -273,9 +285,15 @@ header p {
   transition: all 0.2s ease-in-out;
 }
 
-.edit-btn:hover {
+.edit-btn:not(:disabled):hover {
   background: #3a3a3a;
   color: rgb(223, 223, 223);
+}
+
+.edit-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
 }
 
 .save-btn {
@@ -286,6 +304,7 @@ header p {
   border: none;
   font-size: 0.8rem;
   font-weight: bold;
+  width: 100%;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
 }
@@ -303,13 +322,20 @@ header p {
   border: none;
   font-size: 0.8rem;
   font-weight: bold;
+  width: 100%;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
 }
 
-.delete-btn:hover {
+.delete-btn:not(:disabled):hover {
   background: crimson;
   color: white;
+}
+
+.delete-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
 }
 
 /* Edit card inputs */
@@ -328,7 +354,8 @@ header p {
   text-align: center;
   padding: 16px;
   border-radius: 24px;
-  min-width: 360px;
+  min-width: 320px;
+  box-sizing: border-box;
 }
 
 .summary p {
@@ -351,13 +378,14 @@ header p {
 
 .clear-storage,
 .clear-btn {
-  padding: 8px 18px;
+  padding: 14px 24px;
   border-radius: 8px;
   border: none;
   background: lightgrey;
-  font-size: small;
+  font-size: 12px;
   font-weight: 600;
   cursor: pointer;
+  width: max-content;
 }
 
 .clear-storage:hover,
@@ -366,14 +394,13 @@ header p {
 }
 
 @media (max-width: 768px) {
-
   .app {
     padding: 16px;
   }
+
   .main {
     display: flex;
     flex-direction: column;
-    pad: 12px;
   }
 
   .sidebar {
@@ -388,6 +415,10 @@ header p {
     width: 100%;
   }
 
+  header {
+    border-radius: 8px;
+  }
+
   header h1 {
     font-size: 1.2rem;
   }
@@ -398,18 +429,28 @@ header p {
 
   .search-group {
     display: flex;
-    flex-direction: column;
-    gap: 20px;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
   }
 
   .filters-group {
     display: flex;
     flex-direction: column;
+    gap: 16px;
+  }
+
+  .filters-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    gap: 36px;
   }
 
   .expenses-grid {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
     gap: 16px;
   }
 
@@ -440,11 +481,6 @@ header p {
     margin-top: 16px;
   }
 
-  .input-group label {
-    font-size: 12px
-  }
-
-
   .input-group input,
   .input-group select {
     padding: 10px;
@@ -456,10 +492,14 @@ header p {
 
   .add-btn {
     font-size: 0.8rem;
+    border-radius: 8px;
   }
 
   .summary {
     padding: 16px;
+    border-radius: 8px;
+    min-width: 100%;
+    box-sizing: border-box;
   }
 
   .summary p {
@@ -471,6 +511,10 @@ header p {
   }
 
   .clear-storage {
+    font-size: x-small;
+    width: 100%;
+  }
+  .clear-btn {
     font-size: x-small;
   }
 }
