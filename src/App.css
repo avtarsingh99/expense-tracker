@@ -518,3 +518,39 @@ header p {
     font-size: x-small;
   }
 }
+
+@media (min-width: 769px) and (max-width: 1230px) {
+  .filters-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    gap: 36px;
+  }
+
+  .summary {
+    padding: 16px;
+    border-radius: 8px;
+    min-width: 100%;
+    box-sizing: border-box;
+  }
+
+  .expenses-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .search-group {
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .filters-group {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .content {
+    width: 100%;
+  }
+}
